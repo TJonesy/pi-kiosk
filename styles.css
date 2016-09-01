@@ -1,0 +1,54 @@
+
+	body {
+		padding:50px;
+		box-sizing:border-box;
+		background-color:black;
+		color:white;
+		font-family: 'Quicksand',"Comic Sans MS",  cursive, sans-serif;
+		font-size: 1.8em;
+	}
+	a {
+		color: white;
+		text-decoration: none;
+	}
+	img { 
+		-webkit-filter: grayscale(100%);
+		filter: grayscale(100%);
+	}
+	#clock {
+		position:absolute;
+		left:50px;
+	}
+	#calendar {
+		position:absolute;
+		right:50px;
+	}
+	h1 {
+		font-size: 4em;
+		margin:0;
+	}
+	h2 {
+		font-size: 3em;
+		margin:0px;
+	}
+	#calendar table {
+		border-color:white;
+		background-color:black;
+	}
+	#calendar tr:nth-child(2) th {
+		font-size: 3em;
+	}
+	#calendar tr:nth-child(3) th {
+		font-size: 1.5em;
+	}
+	#calendar td, #calendar th {
+		padding:10px;
+		width: 131px;
+	}
+	#calendar tr:nth-child(1) th  {
+		padding:0px;	
+	}
+	#calendar th img {
+		max-height: 400px;
+		max-width: 1030px;		
+	}
