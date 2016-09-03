@@ -31,8 +31,7 @@ $data = file_get_contents("php://input");
 if ( $data ) {
 	$payload = json_decode($data);
 	$branch = substr($payload->ref, strrpos($payload->ref, '/') + 1);
-	shell_exec( 'cd /srv/www/git-repo/ && git reset --hard HEAD && git pull' );
-	echo "$branch\r\n".git_current_branch($cwd);
+	echo syscall( 'whoami && cd /var/www/kiosk/ && git reset --hard HEAD && git stash && git pull',$cwd );
 	if ($branch == git_current_branch($cwd)) {
 		// pull from $branch
 		$cmd = sprintf('git pull origin %s', $branch);
@@ -55,6 +54,7 @@ if ( $data ) {
 		}
 		$output .= PHP_EOL;
 		$output .= $result;
+		echo $output;
 		mail('taylor@tjon.es', 'GitHub hook `'.$cmd.'` result', $output);
 	}
 }
