@@ -140,9 +140,36 @@ function checkWeather()
         checkWeather()
     }, 60000);
 }
+
+var version = 'start';
+
+function checkVersion()
+{
+	$.get('version.php',function(data){
+		console.log(data);
+		if(version=='start')
+		{
+			version = data;
+			return;
+		}
+		else
+		{
+			if(version!=data)
+			{
+				location.reload();
+			}
+		}
+	}
+		);
+	t = setTimeout(function () {
+        checkVersion()
+    }, 10000);
+}
+
 $(document).ready(function()
 {
 	startTime();
 	checkWeather();
 	generateCalendar();
+	checkVersion();
 });

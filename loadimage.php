@@ -2,11 +2,11 @@
     $feed = simplexml_load_file('https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss');
 	$today = $feed->channel->item;
 
-	$im = ImageCreateFromJpeg((string)$today->enclosure->attributes()->url);
+	$im = @ImageCreateFromJpeg((string)$today->enclosure->attributes()->url);
 	if(!$im)
- 		$im = ImageCreateFromPng((string)$today->enclosure->attributes()->url);
+ 		$im = @ImageCreateFromPng((string)$today->enclosure->attributes()->url);
 	if(!$im)
- 		$im = ImageCreateFromGif((string)$today->enclosure->attributes()->url); 
+ 		$im = @ImageCreateFromGif((string)$today->enclosure->attributes()->url); 
 	$imgw = imagesx($im);
 	$imgh = imagesy($im);
 	$neww = $imgw/$imgh*400;
