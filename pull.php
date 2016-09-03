@@ -26,34 +26,36 @@ function git_current_branch ($cwd) {
     return $matches[1];
   }
 }
-
+$data = file_get_contents("php://input");
 // Use in the "Post-Receive URLs" section of your GitHub repo.
-if ( $_POST['payload'] ) {
-	$payload = json_decode($_POST['payload']);
+if ( $data ) {
+	$payload = json_decode($data);
 	$branch = substr($payload->ref, strrpos($payload->ref, '/') + 1);
 	shell_exec( 'cd /srv/www/git-repo/ && git reset --hard HEAD && git pull' );
+	echo "$branch\r\n".git_current_branch($cwd);
 	if ($branch == git_current_branch($cwd)) {
-    // pull from $branch
-    $cmd = sprintf('git pull origin %s', $branch);
-    $result = syscall($cmd, $cwd);
-    $output = '';
-    // append commits
-    foreach ($payload->commits as $commit) {
-      $output .= $commit->author->name.' a.k.a. '.$commit->author->username;
-      $output .= PHP_EOL;
-      foreach (array('added', 'modified', 'removed') as $action) {
-        if (count($commit->{$action})) {
-          $output .= sprintf('%s: %s; ', $action, implode(',', $commit->{$action}));
-        }
-      }
-      $output .= PHP_EOL;
-      $output .= sprintf('because: %s', $commit->message);
-      $output .= PHP_EOL;
-      $output .= $commit->url;
-      $output .= PHP_EOL;
-    }
-	$output .= PHP_EOL;
-    $output .= $result;
-	mail('taylor@tjon.es', 'GitHub hook `'.$cmd.'` result', $output);
+		// pull from $branch
+		$cmd = sprintf('git pull origin %s', $branch);
+		$result = syscall($cmd, $cwd);
+		$output = '';
+		// append commits
+		foreach ($payload->commits as $commit) {
+		  $output .= $commit->author->name.' a.k.a. '.$commit->author->username;
+		  $output .= PHP_EOL;
+		  foreach (array('added', 'modified', 'removed') as $action) {
+			if (count($commit->{$action})) {
+			  $output .= sprintf('%s: %s; ', $action, implode(',', $commit->{$action}));
+			}
+		  }
+		  $output .= PHP_EOL;
+		  $output .= sprintf('because: %s', $commit->message);
+		  $output .= PHP_EOL;
+		  $output .= $commit->url;
+		  $output .= PHP_EOL;
+		}
+		$output .= PHP_EOL;
+		$output .= $result;
+		mail('taylor@tjon.es', 'GitHub hook `'.$cmd.'` result', $output);
+	}
 }
 ?>
