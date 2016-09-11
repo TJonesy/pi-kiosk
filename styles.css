@@ -39,6 +39,9 @@
 	#calendar tr:nth-child(3) th {
 		font-size: 1.5em;
 	}
+	#calendar tr {
+		font-size:1.2em;
+	}
 	#calendar td, #calendar th {
 		padding:10px;
 		width: 131px;
