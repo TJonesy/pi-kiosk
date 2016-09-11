@@ -61,7 +61,7 @@ var months = ['January','February','March','April','May','June','July','August',
 			}else if(curday==todayday)
 			{
 				
-				$("#calendar table tr:last-child").append("<td><span style='border:solid white 1px;border-radius:50%;width: 20px;height: 20px;display:inline-block;text-align:center;line-height:20px;'>"+curday+"</span><br></td>");
+				$("#calendar table tr:last-child").append("<td><span style='border:solid white 1px;border-radius:50%;width: 25px;height: 25px;display:inline-block;text-align:center;line-height:25px;position:relative;top:-10px;'>"+curday+"</span><br></td>");
 				curday++;
 			}
 			else{
