@@ -32,6 +32,7 @@
 	#calendar table {
 		border-color:white;
 		background-color:black;
+		font-weight:bold;
 	}
 	#calendar tr:nth-child(2) th {
 		font-size: 3em;
