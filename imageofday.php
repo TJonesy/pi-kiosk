@@ -3,5 +3,6 @@
 	$today = $feed->channel->item;
 	$title = $today->title;
 	$link = $today->link;
-	echo "<a href='{$link}'><img src='loadimage.php?color=1'/><p>{$title}</p></a>";
+	$color = isset($_POST['color'])?'?color=1':'';
+	echo "<a href='{$link}'><img src='loadimage.php$color'/><p>{$title}</p></a>";
 ?>

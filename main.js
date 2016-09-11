@@ -47,7 +47,7 @@ var months = ['January','February','March','April','May','June','July','August',
 	var lastday = current.getDate();
 	var curday = 1;
 	$("#calendar table").append("<tr><th colspan=7 id='imageoftheday'></th></tr><tr><th colspan=7>"+months[today.getMonth()]+" &bull; "+today.getFullYear()+"</th></tr><tr><th>Sunday</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th><th>Saturday</th></tr>");
-	$.get("imageofday.php", function (data) {
+	$.get("imageofday.php"+((window.location.hash=='#color')?'?color=1':''), function (data) {
 		$("#imageoftheday").append(data);
 	});
 	while(curday<=lastday)
@@ -106,7 +106,6 @@ function checkWeather()
 		if (this.readyState === 4) {
 			if (this.status === 200) {
 				var weather = $.parseJSON(this.response);
-				console.log(weather);
 				var icon = weather.currently.icon;
 				$('#currentweather').html('<h2><span style="margin-right: 50px;" class="'+iconTable2[icon]+'"></span>'+Math.round(weather.currently.temperature) + '&deg;</h2>');
 			}else{
@@ -120,15 +119,14 @@ function checkWeather()
 		if (this.readyState === 4) {
 			if (this.status === 200) {
 				var weather = $.parseJSON(this.response).list;
-				$('#weather').html('<table>');
+				$('#weather').html('<table></table>');
 				$.each(weather,function(data,element){
 					var xx = new Date();
 					xx.setTime(element.dt*1000);
 					var dayOfWeek = days[xx.getDay()]
 					var icon = element.weather[0].icon;
-					$('#weather').append('<tr><td style="padding-right:30px;">'+dayOfWeek+'</td><td style="padding-right:30px;"><span class="'+iconTable[icon]+'"></span></td><td style="padding-right:30px;">'+Math.round(element.temp.max)+'&deg;</td><td>'+Math.round(element.temp.min)+'&deg;</td></tr>');
+					$('#weather table').append('<tr><td style="padding-right:30px;">'+dayOfWeek+'</td><td style="padding-right:30px;"><span class="'+iconTable[icon]+'"></span></td><td style="padding-right:30px;">'+Math.round(element.temp.max)+'&deg;</td><td>'+Math.round(element.temp.min)+'&deg;</td></tr>');
 				});
-				$('#weather').append('</table>');
 			}else{
 				$('#weather').append("<p>Could not load weather.</p>");
 			}
@@ -146,7 +144,6 @@ var version = 'start';
 function checkVersion()
 {
 	$.get('version.php',function(data){
-		console.log(data);
 		if(version=='start')
 		{
 			version = data;

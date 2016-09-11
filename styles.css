@@ -1,4 +1,6 @@
-
+	#weather table {
+		font-size: 1.7777777em;
+	}
 	body {
 		padding:50px;
 		box-sizing:border-box;
