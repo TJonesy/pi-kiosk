@@ -16,7 +16,7 @@
 		$neww = 1030;
 		$newh = $imgh/$imgw*1030;
 	}
-	if(!isset($_POST['color']))
+	if(!isset($_GET['color']))
 		imagefilter($im, IMG_FILTER_GRAYSCALE); 
     $dst = imagecreatetruecolor($neww, $newh);
     imagecopyresampled($dst, $im, 0, 0, 0, 0, $neww, $newh, $imgw, $imgh);

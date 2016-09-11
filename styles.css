@@ -13,10 +13,6 @@
 		color: white;
 		text-decoration: none;
 	}
-	img { 
-		-webkit-filter: grayscale(100%);
-		filter: grayscale(100%);
-	}
 	#clock {
 		position:absolute;
 		left:50px;
