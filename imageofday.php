@@ -3,5 +3,5 @@
 	$today = $feed->channel->item;
 	$title = $today->title;
 	$link = $today->link;
-	echo "<a href='{$link}'><img src='loadimage.php'/><p>{$title}</p></a>";
+	echo "<a href='{$link}'><img src='loadimage.php?color=1'/><p>{$title}</p></a>";
 ?>
